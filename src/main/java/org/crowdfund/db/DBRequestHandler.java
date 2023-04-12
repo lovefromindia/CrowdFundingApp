@@ -32,7 +32,6 @@ public class DBRequestHandler implements Runnable {
 
             String operation = request.has("operation")?request.getString("operation"):"null";
 
-            //TODO Server side validations to protect DBDriver
             switch (operation)
             {
 

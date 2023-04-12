@@ -35,25 +35,47 @@ public class ServerRequestHandler implements Runnable {
 
             String operation = request.getString("operation");
 
-            //TODO Server side validations to protect DBDriver
             if(operation.equals(Constants.OPERATION_CREATE))
             {
-                clientWriter.writeUTF(SendRequest.fetchResult(DB_IP,DB_PORT,request).toString());
+                if( !request.has("clientId") ||
+                    !request.has("productName")||
+                    !request.has("productInfo") ||
+                    !request.has("askAmount") ||
+                    !request.has("password"))
+                {
+                    clientWriter.writeUTF(DefaultJsonResponse.getDefaultResponse(200, Constants.MISSING_FIELDS).toString());
+                }
+
+                else
+                    clientWriter.writeUTF(SendRequest.fetchResult(DB_IP,DB_PORT,request).toString());
             }
 
             else if(operation.equals(Constants.OPERATION_EXIST))
             {
-                clientWriter.writeUTF(SendRequest.fetchResult(DB_IP,DB_PORT,request).toString());
+
+                if(!request.has("id"))
+                    clientWriter.writeUTF(DefaultJsonResponse.getDefaultResponse(200, Constants.MISSING_FIELDS).toString());
+
+                else
+                    clientWriter.writeUTF(SendRequest.fetchResult(DB_IP,DB_PORT,request).toString());
             }
 
             else if(operation.equals(Constants.OPERATION_DETAILS))
             {
-                clientWriter.writeUTF(SendRequest.fetchResult(DB_IP,DB_PORT,request).toString());
+                if(!request.has("id"))
+                    clientWriter.writeUTF(DefaultJsonResponse.getDefaultResponse(200, Constants.MISSING_FIELDS).toString());
+
+                else
+                    clientWriter.writeUTF(SendRequest.fetchResult(DB_IP,DB_PORT,request).toString());
             }
 
             else if(operation.equals(Constants.OPERATION_INVEST))
             {
-                clientWriter.writeUTF(SendRequest.fetchResult(DB_IP,DB_PORT,request).toString());
+                if(!request.has("id") || !request.has("clientId") || !request.has("amount"))
+                    clientWriter.writeUTF(DefaultJsonResponse.getDefaultResponse(200, Constants.MISSING_FIELDS).toString());
+
+                else
+                    clientWriter.writeUTF(SendRequest.fetchResult(DB_IP,DB_PORT,request).toString());
             }
 
             else

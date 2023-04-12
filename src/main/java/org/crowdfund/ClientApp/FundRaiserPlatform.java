@@ -161,10 +161,6 @@ public class FundRaiserPlatform
                     else
                     {
 
-                        //TODO WHILE LOOP OPTIONS LOGIC PATH FROM HERE
-                        // 1) round details
-                        // 2) buy shares
-                        // 3) exit
                         boolean menu_flag = true;
 
                         double amount;
@@ -375,9 +371,12 @@ public class FundRaiserPlatform
                         System.out.println("SHARES LEFT FOR BUY(%): " + details.get("%sharesLeft"));
                         System.out.println(Constants.NEWLINE);
                         System.out.println("ID OF SHAREHOLDERS | SHARE HOLDING(%)");
-                        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Constants.NEWLINE);
                         Map<String, Object> shareHolders = details.getJSONObject("shareHolders").toMap();
-                        shareHolders.forEach((ownerId, ownership)-> System.out.println(ownerId + " | " + ownership));
+                        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Constants.NEWLINE);
+                        if(shareHolders.size() > 0)
+                            shareHolders.forEach((ownerId, ownership)-> System.out.println(ownerId + " | " + ownership));
+                        else
+                            System.out.println("NO SHAREHOLDERS TILL DATE");
                         System.out.println(Constants.NEWLINE + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Constants.NEWLINE);
 
                     }
